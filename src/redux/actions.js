@@ -24,9 +24,9 @@ export const getWeatherByLocation = (toast) => async (dispatch) => {
             dispatch(getDataLoading());
             
             const weatherResponse = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
-            const { lon, lat } = weatherResponse.data.coord;
+            const { coord } = weatherResponse.data;
             
-            const forecastResponse = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+            const forecastResponse = await axios.get(`/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
             
             const payload = {
                 weatherData: weatherResponse.data,
@@ -56,9 +56,9 @@ export const getWeatherByCity = (city, toast) => async (dispatch) => {
         dispatch(getDataLoading());
         
         const weatherResponse = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
-        const { lon, lat } = weatherResponse.data.coord;
+        const { coord } = weatherResponse.data;
         
-        const forecastResponse = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+        const forecastResponse = await axios.get(`/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
         
         const payload = {
             weatherData: weatherResponse.data,
@@ -78,9 +78,9 @@ export const getWeatherByCity = (city, toast) => async (dispatch) => {
 export const syncData = (city, toast) => async (dispatch) => {
     try {
         const weatherResponse = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
-        const { lon, lat } = weatherResponse.data.coord;
+        const { coord } = weatherResponse.data;
         
-        const forecastResponse = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+        const forecastResponse = await axios.get(`/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
         
         const payload = {
             weatherData: weatherResponse.data,
