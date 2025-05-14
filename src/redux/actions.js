@@ -23,11 +23,11 @@ export const getWeatherByLocation = (toast) => async (dispatch) => {
             const { latitude, longitude } = position.coords;
             dispatch(getDataLoading());
             
-            const [weatherResponse, forecastResponse] = await Promise.all([
-                axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`),
-                axios.get(`/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`)
-            ]);
-
+            const weatherResponse = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
+            const { lon, lat } = weatherResponse.data.coord;
+            
+            const forecastResponse = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+            
             const payload = {
                 weatherData: weatherResponse.data,
                 forcastData: forecastResponse.data.daily
