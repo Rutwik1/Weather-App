@@ -35,7 +35,7 @@ export const Navbar = ({ onCitySearch, onLocationSearch }: NavbarProps) => {
   };
 
   return (
-    <nav className="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-blue-100 min-h-[70px]">
+    <nav className="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 bg-app-bg-light min-h-[70px]">
       {/* City Search Section */}
       <div className="flex items-center">
         <Input
@@ -48,7 +48,7 @@ export const Navbar = ({ onCitySearch, onLocationSearch }: NavbarProps) => {
         />
         <Button
           onClick={handleSearchClick}
-          className="rounded-l-none bg-blue-500 hover:bg-blue-600 text-white" // Example styling
+          className="rounded-l-none bg-app-primary hover:bg-app-primary-darker text-white" // Example styling
         >
           Search
         </Button>
@@ -59,7 +59,7 @@ export const Navbar = ({ onCitySearch, onLocationSearch }: NavbarProps) => {
         <Button
           onClick={handleLocationClick}
           variant="outline" // Example styling
-          className="bg-blue-500 hover:bg-blue-600 text-white"
+          className="bg-app-primary hover:bg-app-primary-darker text-white"
         >
           <MapPin className="mr-2 h-5 w-5" />
           Your Location Weather

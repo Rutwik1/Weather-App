@@ -49,6 +49,10 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom colors for the weather app theme
+        'app-bg-light': '#d7defa', // For Navbar background
+        'app-primary': '#5e82f4',   // For buttons and primary accents
+        'app-primary-darker': '#4a6bcf', // A slightly darker shade for hover states
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -71,5 +75,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate")], // eslint-disable-line @typescript-eslint/no-require-imports
 }

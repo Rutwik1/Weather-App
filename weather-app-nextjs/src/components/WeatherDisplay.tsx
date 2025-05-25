@@ -1,6 +1,7 @@
 'use client'; // May not be strictly needed if all data is passed as props and no internal state/hooks
 
 import { RefreshCw } from 'lucide-react'; // Sync icon
+import { motion } from 'framer-motion';
 
 // Define interfaces for the weather data based on OpenWeatherMap structure
 // and what was used in the original app.
@@ -51,16 +52,28 @@ export const WeatherDisplay = ({ data, onSync, isSyncing }: WeatherDisplayProps)
 
   const { name, main, weather, wind, visibility } = data;
 
+  const spinTransition = {
+    loop: Infinity,
+    ease: "linear",
+    duration: 1, // Adjust duration as needed
+  };
+
   return (
     <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {/* Section 1: Current Weather Basic */}
-        <div className="md:col-span-1 lg:col-span-1 p-6 rounded-lg shadow-lg bg-blue-500 text-white text-center">
+        <div className="md:col-span-1 lg:col-span-1 p-6 rounded-lg shadow-lg bg-app-primary text-white text-center">
           <div className="flex justify-end">
-            <RefreshCw
-              className={`h-6 w-6 cursor-pointer ${isSyncing ? 'animate-spin' : ''}`}
-              onClick={onSync}
-            />
+            <motion.div
+              animate={{ rotate: isSyncing ? 360 : 0 }}
+              transition={isSyncing ? spinTransition : { duration: 0.3 }} // Smooth stop
+              style={{ display: 'inline-block' }} // Keep it inline
+            >
+              <RefreshCw
+                className={`h-6 w-6 cursor-pointer`} // Removed animate-spin
+                onClick={onSync}
+              />
+            </motion.div>
           </div>
           <h2 className="text-3xl font-bold">{name}</h2>
           <p className="text-7xl md:text-8xl font-thin">
@@ -72,7 +85,7 @@ export const WeatherDisplay = ({ data, onSync, isSyncing }: WeatherDisplayProps)
 
         {/* Section 2: Detailed Weather Stats */}
         <div className="md:col-span-1 lg:col-span-1 p-6 rounded-lg shadow-lg bg-white">
-          <h3 className="text-xl font-semibold mb-4 text-blue-600">Details</h3>
+          <h3 className="text-xl font-semibold mb-4 text-app-primary">Details</h3>
           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
             <div className="text-gray-600">Felt Temp:</div>
             <div className="font-medium text-right">{kelvinToCelsius(main.feels_like)}<sup>&deg;C</sup></div>
