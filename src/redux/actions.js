@@ -1,8 +1,10 @@
 import axios from "axios";
-import { weatherAppAPI } from "../helpers/API";
+// import { weatherAppAPI } from "../helpers/API";
 import { myToast } from "../helpers/extraFunctions";
 import { setItem } from "../helpers/sessionStorage";
 import { GET_DATA_ERROR, GET_DATA_LOADING, GET_DATA_SUCCESS } from "./actionTypes";
+import { weatherAppAPI } from "../helpers/API";
+
 
 export const getDataLoading = () => {
     return { type: GET_DATA_LOADING };
