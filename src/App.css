@@ -20,7 +20,6 @@
     transform: scale(1.05);
 }
 
-
 .tagLine {
     display: flex;
     justify-content: center;
@@ -33,15 +32,16 @@
     width: 0ch;
     overflow: hidden;
     white-space: nowrap;
-    animation: tagline 10s  infinite alternate;
-    border-right: 3px solid #5e82f4; 
+    animation: tagline 10s infinite alternate;
+    border-right: 3px solid #5e82f4;
 }
 
 @keyframes tagline {
-      0% {
-          width: 0ch;
-      }
-      50% {
-          width: 28ch;
-      }
+    0% {
+        width: 0ch;
+    }
+
+    50% {
+        width: 28ch;
+    }
 }
