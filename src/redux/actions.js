@@ -97,6 +97,4 @@ export const syncData = (city, toast) => async (dispatch) => {
         dispatch(getDataError());
         myToast(toast, "Failed to sync weather data", "error");
     }
-};
-
-
+};   
