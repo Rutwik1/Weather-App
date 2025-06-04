@@ -24,12 +24,12 @@ export const getWeatherByLocation = (toast) => async (dispatch) => {
         try {
             const { latitude, longitude } = position.coords;
             dispatch(getDataLoading());
-            
+
             const weatherResponse = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
             const { coord } = weatherResponse.data;
-            
+
             const forecastResponse = await axios.get(`/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
-            
+
             const payload = {
                 weatherData: weatherResponse.data,
                 forcastData: forecastResponse.data.daily
@@ -56,12 +56,12 @@ export const getWeatherByLocation = (toast) => async (dispatch) => {
 export const getWeatherByCity = (city, toast) => async (dispatch) => {
     try {
         dispatch(getDataLoading());
-        
+
         const weatherResponse = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
         const { coord } = weatherResponse.data;
-        
+
         const forecastResponse = await axios.get(`/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
-        
+
         const payload = {
             weatherData: weatherResponse.data,
             forcastData: forecastResponse.data.daily
@@ -81,9 +81,9 @@ export const syncData = (city, toast) => async (dispatch) => {
     try {
         const weatherResponse = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
         const { coord } = weatherResponse.data;
-        
+
         const forecastResponse = await axios.get(`/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
-        
+
         const payload = {
             weatherData: weatherResponse.data,
             forcastData: forecastResponse.data.daily
@@ -98,3 +98,5 @@ export const syncData = (city, toast) => async (dispatch) => {
         myToast(toast, "Failed to sync weather data", "error");
     }
 };
+
+
